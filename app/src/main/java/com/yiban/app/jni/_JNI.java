@@ -16,7 +16,4 @@ public class _JNI {
 
     public native String _getEncodeConfigPrivateKey(Context context);
 
-    public native String _getCachePackageName(Context context);
-
-    public native String _getCacheSignature(Context context);
 }

@@ -39,11 +39,4 @@ public class JNI {
         return mJni._getEncodeConfigPrivateKey(context);
     }
 
-    public String getCachePackageName(Context context) {
-        return  mJni._getCachePackageName(context);
-    }
-
-    public String getCacheSignature(Context context) {
-        return  mJni._getCacheSignature(context);
-    }
 }

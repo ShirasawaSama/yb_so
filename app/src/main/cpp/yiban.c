@@ -230,11 +230,6 @@ void initJNICache(JNIEnv *env) {
     mCache->signature_cache = (char *) malloc(signature_length + 1);
     memset(mCache->package_name_cache, 0, pa_length);
     memset(mCache->signature_cache, 0, signature_length);
-    LOGD("%s\n", "================================================================");
-    LOGD("mCache->package_name_cache = %s pa_length = %d\n", mCache->package_name_cache, pa_length);
-    LOGD("mCache->signature_cache = %s signature_length = %d\n", mCache->signature_cache,
-         signature_length);
-    LOGD("%s\n", "================================================================");
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {

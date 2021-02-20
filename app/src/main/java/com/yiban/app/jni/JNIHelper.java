@@ -21,14 +21,4 @@ public class JNIHelper {
         return JNI.getInstance().getEncodeConfigPrivateKey(YibanApplication.getContext());
     }
 
-
-    public static String getCachePackageName() {
-        return JNI.getInstance().getCachePackageName(YibanApplication.getContext());
-    }
-
-    public static String getCacheSignature() {
-        return JNI.getInstance().getCacheSignature(YibanApplication.getContext());
-    }
-
-
 }
