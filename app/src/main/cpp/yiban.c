@@ -24,9 +24,9 @@
   __android_log_print(ANDROID_LOG_FATAL, MODULE_NAME, __VA_ARGS__)
 
 
-const char *jniClassPath = "com/yiban/app/jni/_JNI";
+const static char *jniClassPath = "com/yiban/app/jni/_JNI";
 //const char *packageName = "com.yiban.jni";
-const char *packageName = "com.yiban.app";
+const static char *packageName = "com.yiban.app";
 //正式签名字符串
 const static char *signature = "30820267308201d0a00302010202044ff3ea94300d06092a864886f70d01010505003077310b30090603550406130238363111300f060355040813087368616e676861693111300f060355040713087368616e6768616931183016060355040a130f7777772e323163616d7075732e636e31183016060355040b130f7777772e323163616d7075732e636e310e300c06035504031305796962616e3020170d3132303730343037303234345a180f37343838303432373037303234345a3077310b30090603550406130238363111300f060355040813087368616e676861693111300f060355040713087368616e6768616931183016060355040a130f7777772e323163616d7075732e636e31183016060355040b130f7777772e323163616d7075732e636e310e300c06035504031305796962616e30819f300d06092a864886f70d010101050003818d0030818902818100b43c9d42eabea8f7ae58ceabfa85500dd8dd6decc07e735d2afe6f459763b385f69802397d0c9e905373307eb79747e24603d11dac609b27355732e203450343f3aadfb068d6622cf2c8bf27a9d20bdd9ccef4f59454b74d64507956ce81fcb131e9f4f0f96b715a10d3eed840af8b16f69130db781f0aca89cd151dbddaacfd0203010001300d06092a864886f70d010105050003818100b3b7cebbaf8c1126f8082f29d19dedbe4545620ecc32600275a45a26ccf2ae793510d64fa6e5339c8797db6807314ba78175dcea834a8124b7b2325da4d76da378d6a66980ae1d54c2d0c30d3cc95b494251105421a5c38811bfc2f84caed869546ffcc866c65ad29d4b947c4a0b9082ab3b244d9d20123a83c1c44a7370296d";
 //测试签名字符串
@@ -40,81 +40,60 @@ const static char *publicKey = "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAxbzZ
 const static char *privateKey = "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";
 
 
-//char *package_name_cache;
-//char *signature_cache;
-
-
-
 typedef struct {
     char *package_name_cache;
     char *signature_cache;
 } JNICache;
 
 
-JNICache mJNICache;
-
-
-void j_string2char(JNIEnv *env, jstring source, char **dst) {
-    int length = (*env)->GetStringLength(env, source);
-    if (length > 0) {
-        *dst = (char *) malloc(length + 1);
-
-        const char *temp = (*env)->GetStringUTFChars(env, source, JNI_FALSE);
-
-        memcpy(*dst, temp, length);
-        *dst[length] = 0;
-        free(dst);
-    }
-}
+JNICache *mCache;
 
 
 //获取包名
 void initPackageName(JNIEnv *env, jobject thiz, jobject context) {
-    if (mJNICache.package_name_cache == NULL) {
-        LOGD("package_name_cache = %s", "执行initPackageName");
+    
+    LOGD("package_name_cache = %s", "执行initPackageName");
+    if ((mCache->package_name_cache == NULL) || (mCache->package_name_cache[0] == '\0')) {
+        LOGD("mCache.package_name_cache = %s", "执行 为空");
         jclass j_context = (*env)->GetObjectClass(env, context);
         jmethodID gpn_methodID = (*env)->GetMethodID(env, j_context, "getPackageName",
                                                      "()Ljava/lang/String;");
         jstring j_package_name = (*env)->CallObjectMethod(env, context, gpn_methodID);
-        int length = (*env)->GetStringLength(env, j_package_name);
-
-        mJNICache.package_name_cache = (char *) malloc(length + 1);
-
-        memset(mJNICache.package_name_cache, 0, sizeof(mJNICache.package_name_cache));
+        
+        int pa_length = (*env)->GetStringUTFLength(env, j_package_name);
 
         const char *temp_pa = (*env)->GetStringUTFChars(env, j_package_name, JNI_FALSE);
-        memcpy(mJNICache.package_name_cache, temp_pa, length);
+        LOGD("计算之后  j_package_name转化成c 字符串 = %s\n", temp_pa);
+        memcpy(mCache->package_name_cache, temp_pa, pa_length + 1);
+        
+        free((char *) temp_pa);
+        LOGD("计算之后  mCache.package_name_cache = %s\n", mCache->package_name_cache);
 
-        (*env)->ReleaseStringUTFChars(env, j_package_name, temp_pa);
-
-//        if (length > 0) {
-//            package_name_cache = (char *) malloc(length + 1);
-//            memset(package_name_cache, '\0', sizeof(package_name_cache));
-//            const char *temp_pa = (*env)->GetStringUTFChars(env, j_package_name, JNI_FALSE);
-//            memcpy(package_name_cache, temp_pa, length);
-//            package_name_cache[length] = 0;
-//            (*env)->ReleaseStringUTFChars(env, j_package_name, temp_pa);
-//        }
 
     }
+    LOGD("mCache.package_name_cache = %s", "执行 不为空");
 
 }
 
 
 jboolean checkPackageName(JNIEnv *env, jobject thiz, jobject context) {
+    
+    LOGD("checkPackageName = %s", "执行 checkPackageName");
     initPackageName(env, thiz, context);
-    return mJNICache.package_name_cache != NULL &&
-           strcmp(packageName, mJNICache.package_name_cache) == 0;
+    return (mCache->package_name_cache != NULL) &&
+           (strcmp(packageName, mCache->package_name_cache) == 0);
 }
 
 
 //获取签名
 
 void initSignature(JNIEnv *env, jobject thiz, jobject context) {
+    
+    LOGD("initSignature = %s", "执行 initSignature");
     jboolean same_pn = checkPackageName(env, thiz, context);
 
     if (same_pn) {
-
+        LOGD("same_pn = %s", "执行 包名相同");
 
         jclass j_context = (*env)->GetObjectClass(env, context);
         //android.content.pm
@@ -169,43 +148,60 @@ void initSignature(JNIEnv *env, jobject thiz, jobject context) {
         jstring real_signature = (*env)->CallObjectMethod(env, j_signatures, j_toCharsStringMethod);
 
 
-        int length = (*env)->GetStringLength(env, real_signature);
-
-        mJNICache.signature_cache = (char *) malloc(length + 1);
-
-        memset(mJNICache.signature_cache, 0, sizeof(mJNICache.signature_cache));
+        int signature_length = (*env)->GetStringUTFLength(env, real_signature);
 
         const char *temp_signature = (*env)->GetStringUTFChars(env, real_signature, JNI_FALSE);
-        memcpy(mJNICache.signature_cache, temp_signature, length);
-        (*env)->ReleaseStringUTFChars(env, real_signature, temp_signature);
-//        if (length > 0) {
-//            signature_cache = (char *) malloc(length + 1);
-//            memset(signature_cache, '\0', sizeof(signature_cache));
-//            const char *temp_signature = (*env)->GetStringUTFChars(env, real_signature, JNI_FALSE);
-//            memcpy(signature_cache, temp_signature, length);
-////            signature_cache[length] = 0;
-//            (*env)->ReleaseStringUTFChars(env, real_signature, temp_signature);
-//        }
-
+        memcpy(mCache->signature_cache, temp_signature, signature_length + 1);
+        free((char *) temp_signature);
+    } else {
+        LOGD("same_pn = %s", "执行 包名不相同");
     }
+
 }
 
 jboolean checkSignature(JNIEnv *env, jobject thiz, jobject context) {
-    if (mJNICache.signature_cache == NULL) {
+    
+    LOGD("checkSignature = %s", "执行 checkSignature");
+    if ((mCache->signature_cache == NULL) || (mCache->signature_cache[0] == '\0')) {
+        LOGD("mCache.signature_cache = %s", "NULL");
         initSignature(env, thiz, context);
     }
-    return mJNICache.signature_cache != NULL && strcmp(signature, mJNICache.signature_cache) == 0;
+    LOGD("mCache.signature_cache = %s", mCache->signature_cache);
+    if (mCache->signature_cache != NULL) {
+        LOGD(" strcmp(signature, mCache.signature_cache) = %d",
+             strcmp(signature, mCache->signature_cache));
+    } else {
+        LOGD(" strcmp(signature, mCache.signature_cache) = %s",
+             mCache->signature_cache);
+    }
+
+    return (mCache->signature_cache != NULL) && (strcmp(signature, mCache->signature_cache) == 0);
 }
 
 jstring getEncodePwdPublicKey(JNIEnv *env, jobject thiz, jobject context) {
+    
+    LOGD("getEncodePwdPublicKey = %s", "执行getEncodePwdPublicKey");
     jboolean isSuccess = checkSignature(env, thiz, context);
 
     return (*env)->NewStringUTF(env, isSuccess ? publicKey : "");
 }
 
 jstring getEncodeConfigPrivateKey(JNIEnv *env, jobject thiz, jobject context) {
+    
     jboolean isSuccess = checkSignature(env, thiz, context);
     return (*env)->NewStringUTF(env, isSuccess ? privateKey : "");
+}
+
+jstring getCachePackageName(JNIEnv *env, jobject thiz, jobject context) {
+    
+    initPackageName(env, thiz, context);
+    return (*env)->NewStringUTF(env, mCache->package_name_cache);
+}
+
+jstring getCacheSignature(JNIEnv *env, jobject thiz, jobject context) {
+    
+    initSignature(env, thiz, context);
+    return (*env)->NewStringUTF(env, mCache->signature_cache);
 }
 
 
@@ -216,10 +212,34 @@ static const JNINativeMethod methods[] = {
         "_getEncodePwdPublicKey", "(Landroid/content/Context;)Ljava/lang/String;",
         &getEncodePwdPublicKey,
         "_getEncodeConfigPrivateKey", "(Landroid/content/Context;)Ljava/lang/String;",
-        &getEncodeConfigPrivateKey
+        &getEncodeConfigPrivateKey,
+        "_getCachePackageName", "(Landroid/content/Context;)Ljava/lang/String;",
+        &getCachePackageName,
+        "_getCacheSignature", "(Landroid/content/Context;)Ljava/lang/String;", &getCacheSignature
 };
 
+
+void initJNICache(JNIEnv *env) {
+    mCache = (JNICache *) malloc(sizeof(JNICache));
+    jstring pa_temp = (*env)->NewStringUTF(env, packageName);
+    int pa_length = (*env)->GetStringUTFLength(env, pa_temp);
+    jstring sign_temp = (*env)->NewStringUTF(env, signature);
+    int signature_length = (*env)->GetStringUTFLength(env, sign_temp);
+
+    mCache->package_name_cache = (char *) malloc(pa_length + 1);
+    mCache->signature_cache = (char *) malloc(signature_length + 1);
+    memset(mCache->package_name_cache, 0, pa_length);
+    memset(mCache->signature_cache, 0, signature_length);
+    LOGD("%s\n", "================================================================");
+    LOGD("mCache->package_name_cache = %s pa_length = %d\n", mCache->package_name_cache, pa_length);
+    LOGD("mCache->signature_cache = %s signature_length = %d\n", mCache->signature_cache,
+         signature_length);
+    LOGD("%s\n", "================================================================");
+}
+
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
+
+    LOGD("JNI_OnLoad = %s", "执行 JNI_OnLoad");
     JNIEnv *env = NULL;
     //通过Java虚拟机去创建JNIEnv
     jint jniVersion = -1;
@@ -243,10 +263,22 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     jclass jniClass = (*env)->FindClass(env, jniClassPath);
 
     (*env)->RegisterNatives(env, jniClass, methods, sizeof(methods) / sizeof(JNINativeMethod));
+    LOGD("jniVersion = %d", jniVersion);
 
+
+    initJNICache(env);
     return jniVersion;
 
+}
 
+
+JNIEXPORT void JNI_OnUnload(JavaVM *vm, void *reserved) {
+    LOGD("JNI_OnUnload = %s", "执行 JNI_OnUnload");
+    if (mCache != NULL) {
+        LOGD("JNI_OnUnload = %s", "mCache != NULL");
+        free((char *) mCache->package_name_cache);
+        free((char *) mCache->signature_cache);
+    }
 }
 
 

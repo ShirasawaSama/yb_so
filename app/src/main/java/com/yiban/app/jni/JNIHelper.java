@@ -1,7 +1,5 @@
 package com.yiban.app.jni;
 
-import android.content.Context;
-
 import com.yiban.app.application.YibanApplication;
 
 public class JNIHelper {
@@ -22,4 +20,15 @@ public class JNIHelper {
     public static String getEncodeConfigPrivateKey() {
         return JNI.getInstance().getEncodeConfigPrivateKey(YibanApplication.getContext());
     }
+
+
+    public static String getCachePackageName() {
+        return JNI.getInstance().getCachePackageName(YibanApplication.getContext());
+    }
+
+    public static String getCacheSignature() {
+        return JNI.getInstance().getCacheSignature(YibanApplication.getContext());
+    }
+
+
 }
