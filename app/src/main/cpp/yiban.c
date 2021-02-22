@@ -51,7 +51,7 @@ JNICache *mCache;
 
 //获取包名
 void initPackageName(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     LOGD("package_name_cache = %s", "执行initPackageName");
     if ((mCache->package_name_cache == NULL) || (mCache->package_name_cache[0] == '\0')) {
         LOGD("mCache.package_name_cache = %s", "执行 为空");
@@ -59,13 +59,13 @@ void initPackageName(JNIEnv *env, jobject thiz, jobject context) {
         jmethodID gpn_methodID = (*env)->GetMethodID(env, j_context, "getPackageName",
                                                      "()Ljava/lang/String;");
         jstring j_package_name = (*env)->CallObjectMethod(env, context, gpn_methodID);
-        
+
         int pa_length = (*env)->GetStringUTFLength(env, j_package_name);
 
         const char *temp_pa = (*env)->GetStringUTFChars(env, j_package_name, JNI_FALSE);
         LOGD("计算之后  j_package_name转化成c 字符串 = %s\n", temp_pa);
         memcpy(mCache->package_name_cache, temp_pa, pa_length + 1);
-        
+
         free((char *) temp_pa);
         LOGD("计算之后  mCache.package_name_cache = %s\n", mCache->package_name_cache);
 
@@ -77,7 +77,7 @@ void initPackageName(JNIEnv *env, jobject thiz, jobject context) {
 
 
 jboolean checkPackageName(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     LOGD("checkPackageName = %s", "执行 checkPackageName");
     initPackageName(env, thiz, context);
     return (mCache->package_name_cache != NULL) &&
@@ -88,7 +88,7 @@ jboolean checkPackageName(JNIEnv *env, jobject thiz, jobject context) {
 //获取签名
 
 void initSignature(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     LOGD("initSignature = %s", "执行 initSignature");
     jboolean same_pn = checkPackageName(env, thiz, context);
 
@@ -160,7 +160,7 @@ void initSignature(JNIEnv *env, jobject thiz, jobject context) {
 }
 
 jboolean checkSignature(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     LOGD("checkSignature = %s", "执行 checkSignature");
     if ((mCache->signature_cache == NULL) || (mCache->signature_cache[0] == '\0')) {
         LOGD("mCache.signature_cache = %s", "NULL");
@@ -179,7 +179,7 @@ jboolean checkSignature(JNIEnv *env, jobject thiz, jobject context) {
 }
 
 jstring getEncodePwdPublicKey(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     LOGD("getEncodePwdPublicKey = %s", "执行getEncodePwdPublicKey");
     jboolean isSuccess = checkSignature(env, thiz, context);
 
@@ -187,19 +187,19 @@ jstring getEncodePwdPublicKey(JNIEnv *env, jobject thiz, jobject context) {
 }
 
 jstring getEncodeConfigPrivateKey(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     jboolean isSuccess = checkSignature(env, thiz, context);
     return (*env)->NewStringUTF(env, isSuccess ? privateKey : "");
 }
 
 jstring getCachePackageName(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     initPackageName(env, thiz, context);
     return (*env)->NewStringUTF(env, mCache->package_name_cache);
 }
 
 jstring getCacheSignature(JNIEnv *env, jobject thiz, jobject context) {
-    
+
     initSignature(env, thiz, context);
     return (*env)->NewStringUTF(env, mCache->signature_cache);
 }
@@ -223,6 +223,7 @@ void initJNICache(JNIEnv *env) {
     mCache = (JNICache *) malloc(sizeof(JNICache));
     jstring pa_temp = (*env)->NewStringUTF(env, packageName);
     int pa_length = (*env)->GetStringUTFLength(env, pa_temp);
+
     jstring sign_temp = (*env)->NewStringUTF(env, signature);
     int signature_length = (*env)->GetStringUTFLength(env, sign_temp);
 
@@ -242,13 +243,18 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         jniVersion = JNI_VERSION_1_6;
     }
 
-    if ((*vm)->GetEnv(vm, (void **) (&env), JNI_VERSION_1_4) == JNI_OK) {
-        jniVersion = JNI_VERSION_1_4;
+    if (env == NULL) {
+        if ((*vm)->GetEnv(vm, (void **) (&env), JNI_VERSION_1_4) == JNI_OK) {
+            jniVersion = JNI_VERSION_1_4;
+        }
     }
 
-    if ((*vm)->GetEnv(vm, (void **) (&env), JNI_VERSION_1_2) == JNI_OK) {
-        jniVersion = JNI_VERSION_1_2;
+    if (env == NULL) {
+        if ((*vm)->GetEnv(vm, (void **) (&env), JNI_VERSION_1_2) == JNI_OK) {
+            jniVersion = JNI_VERSION_1_2;
+        }
     }
+
     if (jniVersion == -1) {
         return jniVersion;
     }
