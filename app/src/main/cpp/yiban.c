@@ -212,10 +212,7 @@ static const JNINativeMethod methods[] = {
         "_getEncodePwdPublicKey", "(Landroid/content/Context;)Ljava/lang/String;",
         &getEncodePwdPublicKey,
         "_getEncodeConfigPrivateKey", "(Landroid/content/Context;)Ljava/lang/String;",
-        &getEncodeConfigPrivateKey,
-        "_getCachePackageName", "(Landroid/content/Context;)Ljava/lang/String;",
-        &getCachePackageName,
-        "_getCacheSignature", "(Landroid/content/Context;)Ljava/lang/String;", &getCacheSignature
+        &getEncodeConfigPrivateKey
 };
 
 
