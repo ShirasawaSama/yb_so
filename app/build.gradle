@@ -11,9 +11,8 @@ android {
         applicationId "com.yiban.jni"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
+        versionCode  rootProject.ext.gitCommitCount
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -23,7 +22,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
 //            abiFilters  "armeabi-v7a"
-            moduleName  'yiban'
+            moduleName 'yiban'
         }
         signingConfig signingConfigs.debug
     }
