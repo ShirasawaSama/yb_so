@@ -45,7 +45,9 @@ android {
 
     signingConfigs {
         jni {
-            storeFile file('/Users/yiban/Desktop/android/yiban_jni/YiBan_SO/app/src/main/sign/jni.jks')
+            def  storeFilePath = rootDir.getAbsolutePath() + '/app/src/main/sign/jni.jks'
+            println(storeFilePath)
+            storeFile file(storeFilePath)
             storePassword '111111'
             keyAlias 'jni'
             keyPassword '111111'
