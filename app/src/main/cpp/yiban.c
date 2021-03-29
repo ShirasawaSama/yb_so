@@ -7,6 +7,7 @@
 #include <jni.h>
 #include <string.h>
 #include <android/log.h>
+#include <unistd.h>
 
 
 #define MODULE_NAME "YIBAN_SO"
@@ -214,6 +215,11 @@ jstring getCacheSignature(JNIEnv *env, jobject thiz, jobject context) {
 
     initSignature(env, thiz, context);
     return (*env)->NewStringUTF(env, mCache->signature_cache);
+}
+
+
+int getAppProcessId() {
+    return getpid();
 }
 
 
