@@ -39,4 +39,17 @@ public class JNI {
         return mJni._getEncodeConfigPrivateKey(context);
     }
 
+    public void startAntiDebug(Context context) {
+//        mJni._startAntiDebug(context);
+    }
+
+
+    public String getPwdRSAPublicKey(Context context) {
+        return mJni._getPwdRSAPublicKey(context);
+    }
+
+    public String getPwdRSAPrivateKey(Context context) {
+        return mJni._getPwdRSAPrivateKey(context);
+    }
+
 }

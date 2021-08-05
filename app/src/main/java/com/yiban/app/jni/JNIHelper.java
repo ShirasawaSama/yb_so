@@ -21,4 +21,17 @@ public class JNIHelper {
         return JNI.getInstance().getEncodeConfigPrivateKey(YibanApplication.getContext());
     }
 
+    public static void startAntiDebug() {
+        JNI.getInstance().startAntiDebug(YibanApplication.getContext());
+    }
+
+    //密码公钥
+    public static String getPwdRSAPublicKey() {
+        return JNI.getInstance().getPwdRSAPublicKey(YibanApplication.getContext());
+    }
+    //密码私钥
+    public static String getPwdRSAPrivateKey() {
+        return JNI.getInstance().getPwdRSAPrivateKey(YibanApplication.getContext());
+    }
+
 }
